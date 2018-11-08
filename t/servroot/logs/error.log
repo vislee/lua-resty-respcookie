@@ -1,0 +1,15 @@
+2018/11/08 18:32:38 [notice] 21540#0: using the "kqueue" event method
+2018/11/08 18:32:38 [notice] 21540#0: openresty/1.13.6.1
+2018/11/08 18:32:38 [notice] 21540#0: built by clang 9.1.0 (clang-902.0.39.2)
+2018/11/08 18:32:38 [notice] 21540#0: OS: Darwin 17.7.0
+2018/11/08 18:32:38 [notice] 21540#0: hw.ncpu: 8
+2018/11/08 18:32:38 [notice] 21540#0: net.inet.tcp.sendspace: 131072
+2018/11/08 18:32:38 [notice] 21540#0: kern.ipc.somaxconn: 128
+2018/11/08 18:32:38 [notice] 21540#0: getrlimit(RLIMIT_NOFILE): 4864:9223372036854775807
+2018/11/08 18:32:38 [info] 21542#0: *1 [lua] header_filter_by_lua:9: del cookie:{"test":"test"} while reading response header from upstream, client: 127.0.0.1, server: localhost, request: "GET /t HTTP/1.1", upstream: "http://127.0.0.1:9082/", host: "localhost"
+2018/11/08 18:32:38 [info] 21542#0: *1 [lua] setcookie.lua:223: set_cookie(): ====["","foo=bar; path=\/","test=testcookie; path=\/"] while reading response header from upstream, client: 127.0.0.1, server: localhost, request: "GET /t HTTP/1.1", upstream: "http://127.0.0.1:9082/", host: "localhost"
+2018/11/08 18:32:38 [notice] 21542#0: signal 3 (SIGQUIT) received from 21513, shutting down
+2018/11/08 18:32:38 [notice] 21542#0: signal 15 (SIGTERM) received from 21513, exiting
+2018/11/08 18:32:38 [info] 21542#0: kevent() failed (4: Interrupted system call)
+2018/11/08 18:32:38 [notice] 21542#0: exiting
+2018/11/08 18:32:38 [notice] 21542#0: exit
