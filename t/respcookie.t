@@ -27,8 +27,8 @@ __DATA__
             ngx.say("ok")
         }
         header_filter_by_lua_block {
-            local setck = require "resty.setcookie"
-            local cookie = setck:new()
+            local respck = require "resty.respcookie"
+            local cookie = respck:new()
             local ck, err = cookie:set("test=testcookie; path=/")
             if err ~= nil then
                 ngx.log(ngx.ERR, err)
@@ -73,8 +73,8 @@ set-cookie: test=testcookie; path=/
 
         header_filter_by_lua_block {
             local cjson = require "cjson.safe"
-            local setck = require "resty.setcookie"
-            local cookie = setck:new()
+            local respck = require "resty.respcookie"
+            local cookie = respck:new()
             local ck, err = cookie:set("test=testcookie; path=/")
             if err ~= nil then
                 ngx.log(ngx.ERR, err)
@@ -119,8 +119,8 @@ set-cookie: test=testcookie; path=/, foo=bar; path=/
 
         header_filter_by_lua_block {
             local cjson = require "cjson.safe"
-            local setck = require "resty.setcookie"
-            local cookie = setck:new()
+            local respck = require "resty.respcookie"
+            local cookie = respck:new()
             local ck, err = cookie:del("test")
             if err ~= nil then
                 ngx.log(ngx.ERR, err)
@@ -166,8 +166,8 @@ set-cookie: foo=bar; path=/
 
         header_filter_by_lua_block {
             local cjson = require "cjson.safe"
-            local setck = require "resty.setcookie"
-            local cookie = setck:new()
+            local respck = require "resty.respcookie"
+            local cookie = respck:new()
             local ck = cookie:get("test")
             for k, v in ipairs(ck) do
                 ngx.log(ngx.INFO, k, "====", v)
@@ -213,8 +213,8 @@ set-cookie: test=test; path=/; http, foo=bar; path=/
 
         header_filter_by_lua_block {
             local cjson = require "cjson.safe"
-            local setck = require "resty.setcookie"
-            local cookie = setck:new()
+            local respck = require "resty.respcookie"
+            local cookie = respck:new()
             local field = cookie:get_all()
             local test = field["test"]
             if test == nil or test["domain"] ~= "test.com" or test[1] ~= "HttpOnly" then
