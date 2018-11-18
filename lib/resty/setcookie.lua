@@ -160,6 +160,11 @@ function _M.get(self, key)
 end
 
 
+function _M.get_all(self)
+    return self._cookie
+end
+
+
 function _M.del(self, key)
     local ck = self._cookie[key]
     self._cookie[key] = nil
@@ -193,9 +198,8 @@ function _M.set_cookie(self)
             tmp[#tmp+1] = ck["_string"]
         end
     end
-    ngx.log(ngx.INFO, "====", cjson.encode(tmp))
 
-    ngx.header["set-cookie"] = tmp
+    ngx.header["Set-Cookie"] = tmp
     tab_clear(tmp)
 end
 

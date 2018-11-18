@@ -185,3 +185,52 @@ set-cookie: test=test; path=/; http, foo=bar; path=/
 --- error_code: 200
 --- no_error_log
 [error]
+
+
+=== TEST 5: cookie:get_all
+--- http_config
+    lua_package_path 'lib/?.lua;;';
+
+    init_by_lua_block {
+        require 'luacov.tick'
+        jit.off()
+    }
+
+    server {
+        listen 127.0.0.1:9082;
+
+        location / {
+            content_by_lua_block {
+                ngx.header["set-cookie"] = {"test=test; path=/; domain=test.com; HttpOnly; secure", "foo=bar; path=/"}
+                ngx.say("ok")
+            }
+        }
+    }
+
+--- config
+    location /t {
+        proxy_pass http://127.0.0.1:9082/;
+
+        header_filter_by_lua_block {
+            local cjson = require "cjson.safe"
+            local setck = require "resty.setcookie"
+            local cookie = setck:new()
+            local field = cookie:get_all()
+            local test = field["test"]
+            if test == nil or test["domain"] ~= "test.com" or test[1] ~= "HttpOnly" then
+                ngx.exit(ngx.HTTP_FORBIDDEN)
+            end
+            local foo = field["foo"]
+            if foo == nil or foo["foo"] ~= "bar" then
+                ngx.exit(ngx.HTTP_FORBIDDEN)
+            end
+        }
+    }
+
+--- request
+GET /t
+--- response_headers_like
+set-cookie: test=test; path=/; domain=test.com; HttpOnly; secure, foo=bar; path=/
+--- error_code: 200
+--- no_error_log
+[error]

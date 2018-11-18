@@ -12,6 +12,7 @@ Table of Contents
 * [Methods](#methods)
     * [new](#new)
     * [get](#get)
+    * [get_all](#get_all)
     * [del](#del)
     * [set](#set)
     * [set_cookie](#set_cookie)
@@ -69,6 +70,11 @@ get
 
 [Back to TOC](#table-of-contents)
 
+get_all
+-------
+`syntax: field_tab = cookie_obj:get_all()`
+
+[Back to TOC](#table-of-contents)
 
 del
 ---
